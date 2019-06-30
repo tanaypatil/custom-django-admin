@@ -1,0 +1,176 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ consumer.phone1 }} | NFLM-Nertia</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'PdfGen/bootstrap.min.css' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'PdfGen/custom.css' %}" >
+</head>
+<body style="background-image: none; background-color: white">
+
+<div class="container">
+    <div class="row  logo_con">
+        <div class="col-md-4">
+            <img src="{% static 'PdfGen/logo.png' %}" class="img-responsive logo">
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <div class="title">
+                Consumer Details
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" style="background-color: white; padding-bottom: 10px">
+
+
+
+
+        <div role="tabpanel">
+
+            <ul class="nav nav-tabs tab_head" role="tablist">
+                <li role="presentation" class="active"><a href="#bin" data-toggle="tab" role="tab" aria-controls="tab1">Basic Info</a></li>
+                <li role="presentation"><a href="#per" data-toggle="tab" role="tab" aria-controls="tab2">Persona</a></li>
+                <li role="presentation"><a href="#img" data-toggle="tab" role="tab" aria-controls="tab3">User Images</a></li>
+                <li role="presentation"><a href="#link" data-toggle="tab" role="tab" aria-controls="tab4">Social Links</a></li>
+                <li role="presentation"><a href="#add" data-toggle="tab" role="tab" aria-controls="tab5">Alternate Addresses</a></li>
+                <li role="presentation"><a href="#log" data-toggle="tab" role="tab" aria-controls="tab5">Logs</a></li>
+                <li role="presentation"><a href="#order" data-toggle="tab" role="tab" aria-controls="tab5">Orders</a></li>
+            </ul>
+
+            <div id="tabContent1" class="tab-content">
+
+                <div role="tabpanel" class="tab-pane fade in active" id="bin">
+                    <p>
+                      <span class="data1 col-md-2">Name: </span><span class="data col-md-4">{{ consumer.name }}</span>
+                      <span class="data1 col-md-2">Middle Name : </span><span class="data col-md-4">{{ consumer.middle_name }}</span><br><br>
+                      <span class="data1 col-md-2">Last Name : </span><span class="data col-md-4">{{ consumer.last_name }}</span>
+                      <span class="data1 col-md-2">Alt. Name : </span><span class="data col-md-4">{{ consumer.alt_name }}</span><br><br><hr class="hr_g">
+                      <span class="data1 col-md-2">DoB : </span><span class="data col-md-4">{{ consumer.dob }}</span><br><br><hr class="hr_g">
+                      <span class="data1 col-md-2">Phone1 : </span><span class="data col-md-4">{{ consumer.phone1 }}</span>
+                      <span class="data1 col-md-2">Phone2 : </span><span class="data col-md-4">{{ consumer.phone2 }}</span><br><br>
+                      <span class="data1 col-md-2">Email : </span><span class="data col-md-4">{{ consumer.email }}</span><br><br><hr class="hr_g">
+                      <span class="data1 col-md-2">Address : </span><span class="data col-md-10">{{ consumer.address }}</span><br><br>
+                      <span class="data1 col-md-2">City : </span><span class="data col-md-4">{{ consumer.city }}</span>
+                      <span class="data1 col-md-2">State: </span><span class="data col-md-4">{{ consumer.state }}</span><br><br>
+                      <span class="data1 col-md-2">Pincode: </span><span class="data col-md-4">{{ consumer.pincode }}</span><br><br><hr class="hr_g">
+                      <span class="data1 col-md-2">Tags: </span><span class="data col-md-4">{% for tag in consumer.tag.all  %}
+                      {{ tag.title }},
+                      {% endfor %}</span>
+                    <br><br>
+                    </p>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="per" style="overflow-y: scroll; max-height: 483px">
+                    <p>
+                        <span class="data1 col-md-2">Rating: </span><span class="data col-md-4">{{ consumer.rating }}</span><br><br>
+                        <span class="data1 col-md-2">Age-Range: </span><span class="data col-md-4">{{ consumer.age_range }}</span>
+                        <span class="data1 col-md-2">Gender: </span><span class="data col-md-4">{{ consumer.gender }}</span><br><br>
+                        <span class="data1 col-md-2">Income Level: </span><span class="data col-md-4">{{ consumer.income_level }}</span>
+                        <span class="data1 col-md-2">Occupation: </span><span class="data col-md-4">{{ consumer.occupation }}</span><br><br>
+                        <span class="data1 col-md-2">Places Lived: </span><span class="data col-md-10">
+                        {% for city in consumer.places_lived.all %}{{ city.name }}, {% endfor %}
+                        </span><br><br><hr class="hr_g">
+                        <span class="data1 col-md-2">Occupation Details: </span><span class="data col-md-10">{{ consumer.occupation_details|linebreaks }}</span>
+                        <span class="data1 col-md-12" style="color: gray">________________________________________________________________________________________________________________________</span>
+                        <span class="data1 col-md-2">User Persona: </span><span class="data container-fluid col-md-10">{{ consumer.user_persona|linebreaks }}</span>
+                        <span class="data1 col-md-12"  style="color: gray">________________________________________________________________________________________________________________________</span>
+                        <span class="data1 col-md-2">Marital Status: </span><span class="data col-md-10">{{ consumer.marital_status}}</span><br><br>
+                        <span class="data1 col-md-2">Family Details: </span><span class="data col-md-10">{{ consumer.spouse_and_children|linebreaks }}</span><br><br>
+                    </p>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="img" style="overflow-y: scroll; max-height: 483px">
+                    <p class="col-md-12">
+                        {% for img in images %}
+                            {% ifequal img.user.phone1 consumer.phone1 %}
+                                <div class="col-md-4">
+                                    <img width="250" height="250" src="{{ img.img.url }}" alt="{{ img.alt_text }}" class="img-thumbnail img-responsive" style="margin-bottom: 35px">
+                                </div>
+                            {% endifequal %}
+                        {% endfor %}
+                        <br><br><br>
+                    </p>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="link">
+                    <p>
+                        {% for link in links %}
+                            {% ifequal link.user.phone1 consumer.phone1 %}
+                                <span class="data1 col-md-1">-------</span><span class="data col-md-11">{{ link.url }}</span><br><br><br>
+                            {% endifequal %}
+                        {% endfor %}
+                    </p>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="add"  style="overflow-y: scroll; max-height: 483px">
+                    <p>
+                        {% for addr in addresses %}
+                            {% ifequal addr.user.phone1 consumer.phone1 %}
+                                <span class="data1 col-md-3 underline">Address------.</span>
+                                <br><br>
+                                <span class="data col-md-2">Address : </span><span class="data col-md-9">{{ addr.address }}</span><br><br>
+                                <span class="data col-md-2">City : </span><span class="data col-md-5">{{ addr.city }}-{{ addr.pincode }}</span>
+                                <span class="data col-md-2">State : </span><span class="data col-md-3">{{ addr.state }}</span><br><br><br><br>
+                            {% endifequal %}
+                        {% endfor %}
+                    </p>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="log"  style="overflow-y: scroll; max-height: 483px">
+                    <p>
+                        {% for log in logs %}
+                            {% ifequal log.user.phone1 consumer.phone1 %}
+                                <span class="data1 col-md-3">.------.</span>
+                                <br><br>
+                                <span class="data col-md-2">Employee Name : </span><span class="data col-md-9">{{ log.employee_name }}</span><br><br>
+                                <span class="data col-md-2">Mode : </span><span class="data col-md-3">{{ log.mode }}</span>
+                                <span class="data col-md-2">Date : </span><span class="data col-md-3">{{ log.date_time }}</span><br><br>
+                                <span class="data col-md-2">Interaction : </span><span class="data col-md-9">{{ log.intearction|linebreaks }}</span><br><br><br><br>
+                            {% endifequal %}
+                        {% endfor %}
+                    </p>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="order"  style="overflow-y: scroll; max-height: 483px">
+                    <p>
+                        {% for order in orders %}
+                            {% ifequal order.user.phone1 consumer.phone1 %}
+                                <span class="data1 col-md-3">.------.</span>
+                                <br><br>
+                                <span class="data col-md-2">Portal : </span><span class="data col-md-3">{{ order.portal }}</span>
+                                <span class="data col-md-2">Order Id : </span><span class="data col-md-3">{{ order.order_id }}</span><br><br>
+                                <span class="data col-md-2">Date : </span><span class="data col-md-3">{{ order.order_date }}</span>
+                                <span class="data col-md-2">Method : </span><span class="data col-md-3">{{ order.method }}</span><br><br>
+                                <span class="data col-md-2">Shipping Cost : </span><span class="data col-md-3">{{ order.shipping_cost }}</span>
+                                <span class="data col-md-2">Dispatch Date : </span><span class="data col-md-3">{{ order.dispatch_date }}</span><br><br>
+                                <span class="data col-md-2">Delivery Vendor : </span><span class="data col-md-3">{{ order.delivery_vendor }}</span><br><br>
+                                <span class="data col-md-2">Tracking Id : </span><span class="data col-md-3">{{ order.tracking_id }}</span>
+                                <span class="data col-md-2">Delivery Date : </span><span class="data col-md-3">{{ order.delivery_date }}</span><br><br>
+                                <span class="data col-md-2">Note : </span><span class="data col-md-3">{{ order.note|linebreaks }}</span><br><br><br><br>
+                                <span class="data col-md-2">Review : </span><span class="data col-md-3">{{ order.review }}</span><br><br><br><br><br><br>
+                            {% endifequal %}
+                        {% endfor %}
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="{% static 'PdfGen/jquery-2.2.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'PdfGen/bootstrap.min.js' %}"></script>
+</body>
+</html>

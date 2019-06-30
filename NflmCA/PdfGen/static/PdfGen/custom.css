@@ -1,0 +1,97 @@
+body {
+    background-image: url("bckg.jpg");
+}
+
+.logo_con{
+    padding-top: 15px;
+}
+.logo{
+    width: 153px;
+    height: 55px;
+    border: 2px dotted #805549;
+    border-radius: 5px;
+    padding: 4px;
+    background-color: hsla(0,100%,100%,0.7);
+}
+
+.hr_g{
+    background-color: #9d9d9d;
+    color: #9d9d9d;
+    border: none;
+    box-shadow: none;
+    height: 1px;
+    line-height: 10px;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.hr_b{
+    background-color: #575757;
+    color: #575757;
+    border: none;
+    box-shadow: none;
+    height: 1px;
+    line-height: 5px;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+@font-face{
+    font-family: "pristina";
+    src: url(pristina.TTF);
+}
+.title{
+    font-family: "pristina";
+    color: #805549;
+    font-size: 40px;
+    text-decoration: underline;
+    text-decoration-style: double !important;
+}
+
+@font-face{
+    font-family: "photo";
+    src: url(Photographs.ttf);
+}
+.catg_title{
+    color: #2B333D;
+    font-size: 38px;
+    letter-spacing: 0.09em !important;
+    font-family: "photo";
+}
+
+
+@font-face{
+    font-family: "calibri";
+    src: url(calibri.ttf);
+}
+.data{
+    color: #2B333D;
+    font-size: 16px !important;
+    font-family: "calibri";
+    font-weight: bold;
+}
+.data1{
+    color: #2B333D;
+    font-size: 16px !important;
+    font-family: "calibri";
+}
+
+.underline{
+    text-decoration: underline !important;
+}
+.bold{
+    font-weight: bold !important;
+}
+
+.tab_head{
+    font-family: "photo" !important;
+    font-size: 27px;
+    letter-spacing: 0.07em;
+}
+
+.tab-pane{
+    background-color: wheat;
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 10px;
+}

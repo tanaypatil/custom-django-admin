@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NFLM</title>
+    <style>
+
+        body {
+            background-color: #2B333D
+        }
+
+        .form{
+            margin-left: 40%;
+            margin-top: 5%;
+        }
+
+        #phonenum{
+            border-radius: 8px;
+            width: 275px;
+            height: 40px;
+            border: dashed 3px #1B75B1;
+            background-color: white;padding: 8px;
+        }
+
+        #submit{
+            width: 60px;
+            height: 30px;
+            border-radius: 7px;
+            background-color: #ba2121;
+            color: white;
+            box-shadow: 1px 1px 2px black;
+            border: none;
+            position: relative;
+            margin-left: 13%;
+        }
+
+        #submit:hover{
+            background-color: whitesmoke;
+            color: #1B75B1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form">
+        <form method="post" action="{% url 'cus_details' %}">{% csrf_token %}
+            <input type="text" name="phonenum" id="phonenum" placeholder="Enter Consumer Phone Number">
+            <br><br>
+            <input type="submit" data-target="_blank" name="submit" id="submit">
+        </form>
+    </div>
+
+</body>
+</html>

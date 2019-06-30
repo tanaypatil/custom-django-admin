@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Consumer Details</title>
+    <style>
+        #logo{
+            width: 225px !important;
+            height: 75px !important;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #bih{
+            color: #00AD7C;
+            font-size: 28px;
+            text-decoration: underline;
+            text-decoration-color: #354052 !important;
+        }
+
+        .ntext{
+            font-size: 14px;
+            color: #2B333D;
+        }
+
+        .table{
+            border: none;
+            margin-left: 10%;
+        }
+
+        .head{
+            margin-left: 0% !important;
+            color: #ffcd12;
+            text-decoration: underline;
+            font-size: 30px;
+            width: 50%;
+        }
+
+        .logodiv{
+            width: 45%;
+        }
+
+        .colo{
+            color: #354052;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+{% for simg in simages %}
+
+    <div class="container">
+        <!--logo-->
+        <div class="row">
+            <div class="logodiv">
+                {% ifequal simg.alt_text "logo" %}
+                <img id="logo" src="/media/{{ simg.img.url }}">
+                {% endifequal %}
+            </div><br>
+            <div class="head">
+                    Consumer Details - <span style="color: black"> {{ consumer.phone1 }} </span>
+            </div>
+        <hr />
+        </div>
+
+        <!--basic info-->
+        <div class="row">
+            <div class="col-md-10">
+                <br />
+                <div id="bih">
+                    Basic Info
+                    <br />
+                </div>
+                <div class="ntext">
+                    <table class="table" cellpadding="6" cellspacing="3" style="border: 0.2px solid #00AD7C" >
+                        <tr>
+                            <td class="colo" width="20%">Phone1</td><td width="80%">{{ consumer.phone1 }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Name</td><td>{{ consumer.name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Middle Name</td><td>{{ consumer.middle_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Last Name</td><td>{{ consumer.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Alt Name</td><td>{{ consumer.alt_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Phone2</td><td>{{ consumer.phone2 }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Address</td><td>{{ consumer.address }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">City</td><td>{{ consumer.city }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Pincode</td><td>{{ consumer.pincode }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">State</td><td>{{ consumer.state }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Email</td><td>{{ consumer.email }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Tags</td><td>{% for tag in consumer.tag.all %}{{ tag.title }}, {% endfor %}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!--Persona-->
+        <div class="row">
+            <div class="col-md-10">
+                <br />
+                <div id="bih">
+                    Persona
+                    <br />
+                </div>
+                <div class="ntext">
+                    <table class="table" cellpadding="6" cellspacing="3" style="border: 0.2px solid #00AD7C">
+                        <tr>
+                            <td class="colo" width="20%">Age Range</td><td width="80%">{{ consumer.age_range }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Gender</td><td>{{ consumer.gender }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Income Level</td><td>{{ consumer.income_level }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Places Lived</td><td>{% for city in consumer.places_lived.all %}
+                            {{ city.name }},
+                            {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Occupation</td><td>{{ consumer.occupation }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Marital Status</td><td>{{ consumer.marital_status }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Rating</td><td>{{ consumer.rating }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">User Persona</td><td style="font-size: 16px">{{ consumer.user_persona }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Occupation Details</td><td style="font-size: 16px">{{ consumer.occupation_details }}</td>
+                        </tr>
+                        <tr>
+                            <td class="colo">Spouse And Children</td><td style="font-size: 16px">{{ consumer.spouse_and_children }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <!--User Images-->
+        <div id="bih">
+            User Images
+            <br />
+        </div>
+        <div class="row">
+        <table cellpadding="4" cellspacing="3" style="border: 0.2px solid #00AD7C">
+            <tr><th class="colo" width="80%">Image</th><th class="colo" width="20%">About Image</th></tr>
+            {% for img in images %}
+                {% ifequal img.user.phone1 consumer.phone1 %}<tr>
+                    <td><img src="/media/{{ img.img.url }}" alt="{{ img.alt_text }}" width="270px" height="270px"></td>
+                    <td>{{ img.alt_text }}</td>
+                </tr>{% endifequal %}
+            {% endfor %}
+        </table>
+        </div>
+
+    <br><br>
+    <!--Alternate Address-->
+    <div>
+        <div id="bih">
+            Alternate Addresses
+            <br />
+        </div>
+        <div class="ntext">
+        <table cellpadding="6" cellspacing="3" style="border: 0.2px solid #00AD7C">
+            <tr><th class="colo">Address</th><th class="colo">City</th><th class="colo">Pincode</th><th class="colo">State</th></tr>
+            {% for addr in addresses %}
+                {% ifequal addr.user.phone1 consumer.phone1 %}
+                    <tr><td>{{ addr.address }}</td><td>{{ addr.city }}</td><td>{{ addr.pincode }}</td><td>{{ addr.state }}</td></tr>
+                {% endifequal %}
+            {% endfor %}
+        </table>
+        </div>
+    </div>
+
+
+    <br><br>
+    <!--SOCIAL LINKS-->
+    <div style="max-width:90%">
+        <div id="bih">
+            Social Links
+            <br />
+        </div>
+        <div class="ntext">
+        <table cellpadding="6" cellspacing="3" width="100%" style="border: 0.2px solid #00AD7C">
+            <tr><th class="colo">URL</th></tr>
+            {% for link in links %}
+                {% ifequal link.user.phone1 consumer.phone1 %}
+                    <tr><td>{{ link.url }}</td></tr>
+                {% endifequal %}
+            {% endfor %}
+
+        </table>
+        </div>
+    </div>
+
+
+    </div>
+
+{% endfor %}
+
+</body>
+</html>

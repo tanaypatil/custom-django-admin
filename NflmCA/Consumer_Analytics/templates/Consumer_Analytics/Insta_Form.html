@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'Consumer_Analytics/slate.min.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row" style="margin-top: 75px">
+            <div class="col-md-offset-1 col-md-10">
+                <form class="form-horizontal" method="post" action="{% url "insta" %}">{% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" name="instaid" placeholder="Instagram Id" required>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" name="un" placeholder=" Your ID" required>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="password" class="form-control" name="pwd" placeholder=" Your Password" required>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="submit" onclick="process()" class="btn-primary form-control" name="submit" id="submit" value="SUBMIT">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script defer type="text/javascript">
+        var btn = document.getElementById("submit");
+        function process() {
+            btn.value = "Processing...."
+        }
+    </script>
+
+<script src="{% static 'Consumer_Analytics/jquery-2.2.2.min.js' %}"></script>
+<script src="{% static 'Consumer_Analytics/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

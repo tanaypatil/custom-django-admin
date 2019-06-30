@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fb_Scrape</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'Consumer_Analytics/slate.min.css' %}">
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="row" style="margin-top: 75px">
+            <div class="col-md-offset-3 col-md-6">
+                <form class="form-horizontal" method="post" action="{% url "fb" %}">{% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="fbid" placeholder="Facebook Id" required>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="submit" onclick="process()" class="btn-danger form-control" name="submit" id="submit" value="SUBMIT">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+<script src="{% static 'Consumer_Analytics/jquery-2.2.2.min.js' %}"></script>
+<script src="{% static 'Consumer_Analytics/bootstrap.min.js' %}"></script>
+</body>
+</html>

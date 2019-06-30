@@ -1,0 +1,2 @@
+2017-12-21 17:04:33,382 - instagram_scraper.app - ERROR - Login failed for ritusharma.3678
+2017-12-21 17:04:33,382 - instagram_scraper.app - ERROR - {"status": "ok", "authenticated": false, "user": false}
